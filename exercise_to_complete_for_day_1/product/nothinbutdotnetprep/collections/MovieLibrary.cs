@@ -33,7 +33,7 @@ namespace nothinbutdotnetprep.collections
         {
             foreach (var movie in _allMovies)
             {
-                return (movie.title == m.title);
+                if (movie.title == m.title) return true;
             }
 
             return false;
