@@ -316,6 +316,8 @@ namespace nothinbutdotnetprep.tests
                  * year published. For this test you cannot add any extra properties/fields to either the ProductionStudio or
                  * Movie classes.*/
 
+                Console.Write(results);
+
                 results.should_only_contain_in_order(the_ring, theres_something_about_mary, a_bugs_life, cars, shrek, indiana_jones_and_the_temple_of_doom,
                                                      pirates_of_the_carribean);
             };
