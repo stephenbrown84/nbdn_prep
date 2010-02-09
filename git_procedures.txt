@@ -1,0 +1,24 @@
+Steps to complete before end of break:
+
+1) Fork my repository : github.com/developwithpassion/nbdn_prep.git
+2) Create a clone of your repository using your private repository url
+3) Do some refactoring of the prep exercise if you have some time!!
+
+
+remember the following git commands:
+-git add -A - adds all of the changes recursively
+-git checkout -b {branch_name} -Creates a branch with the branch name
+-git commit -m - Commits any changes to the branch you are on
+-git checkout {branch_name} - switches you the branch 
+-git merge {branch_name} - merges the branch_name with the current branch you are on
+-git pull {remote_name} {branch_name} - pulls the version of the source from the specified remote for the specified branch
+
+remember the checkin dance (keep in mind that I omitted the step of creating a branch to do the pull onto, as you don't have to)
+-add
+-commit
+-pull remote changes
+-merge any necessary conflicts
+-push (if necessary)
+
+
+Develop With Passion!!!!
