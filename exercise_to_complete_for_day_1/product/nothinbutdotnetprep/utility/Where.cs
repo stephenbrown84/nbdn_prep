@@ -1,35 +1,28 @@
-﻿using System;
-using nothinbutdotnetprep.collections;
+using System;
 
 namespace nothinbutdotnetprep.utility
 {
-    public class Where<T>
+    public class Where<ItemToFilter>
     {
-        public static Condition<T> has_a(Func<Movie,ProductionStudio> func)
+        public static CriteriaFactory<ItemToFilter, PropertyType> has_a<PropertyType>(Func<ItemToFilter, PropertyType> accessor)
         {
-            return new Condition<T>(func);
+            return new CriteriaFactory<ItemToFilter, PropertyType>(accessor);
         }
     }
 
-    public class Condition<T>
+    public class CriteriaFactory<ItemToFilter, PropertyType>
     {
-        private Func<Movie, ProductionStudio> _criteria;
-        private ProductionStudio _studio;
+        Func<ItemToFilter, PropertyType> accessor;
 
-        public Condition(Func<Movie, ProductionStudio> criteria)
+        
+        public CriteriaFactory(Func<ItemToFilter, PropertyType> accessor)
         {
-            _criteria = criteria;
+            this.accessor = accessor;
         }
 
-        public Predicate<Movie> equal_to(ProductionStudio studio)
+        public Criteria<ItemToFilter> equal_to(PropertyType value)
         {
-            _studio = studio;
-            return check_condition;
-        }
-
-        private bool check_condition(Movie movie)
-        {
-            return _criteria(movie) == _studio;
+            return new AnonymousCriteria<ItemToFilter>(x => accessor(x).Equals(value));
         }
     }
 }
