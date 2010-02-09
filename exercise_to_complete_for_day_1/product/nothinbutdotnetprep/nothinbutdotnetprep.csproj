@@ -50,6 +50,8 @@
     <Compile Include="utility\BinaryCriteria.cs" />
     <Compile Include="utility\Criteria.cs" />
     <Compile Include="utility\CriteriaExtensions.cs" />
+    <Compile Include="utility\CriteriaFactory.cs" />
+    <Compile Include="utility\NegatingCriteria.cs" />
     <Compile Include="utility\OrCriteria.cs" />
     <Compile Include="utility\Where.cs" />
   </ItemGroup>
