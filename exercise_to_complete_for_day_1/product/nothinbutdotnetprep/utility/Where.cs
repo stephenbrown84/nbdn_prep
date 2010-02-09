@@ -8,10 +8,11 @@ namespace nothinbutdotnetprep.utility
         {
             return new CriteriaFactory<ItemToFilter, PropertyType>(accessor);
         }
-        public static ComparisonCriteriaFactory<ItemToFilter, PropertyType> has_an<PropertyType>(Func<ItemToFilter, PropertyType> accessor) where PropertyType : IComparable<PropertyType>
+
+        public static ComparableCriteriaFactory<ItemToFilter, PropertyType> has_an<PropertyType>(Func<ItemToFilter, PropertyType> accessor)
+            where PropertyType : IComparable<PropertyType>
         {
-            return new ComparisonCriteriaFactory<ItemToFilter, PropertyType>(accessor);
-            
+            return new ComparableCriteriaFactory<ItemToFilter, PropertyType>(accessor);
         }
     }
 }

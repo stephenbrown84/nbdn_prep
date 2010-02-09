@@ -48,11 +48,18 @@
     <Compile Include="utility\AndCriteria.cs" />
     <Compile Include="utility\AnonymousCriteria.cs" />
     <Compile Include="utility\BinaryCriteria.cs" />
+    <Compile Include="utility\ComparableCriteriaFactory.cs" />
     <Compile Include="utility\Criteria.cs" />
     <Compile Include="utility\CriteriaExtensions.cs" />
     <Compile Include="utility\CriteriaFactory.cs" />
+    <Compile Include="utility\EqualToCriteria.cs" />
+    <Compile Include="utility\GreaterThanCriteria.cs" />
     <Compile Include="utility\NegatingCriteria.cs" />
     <Compile Include="utility\OrCriteria.cs" />
+    <Compile Include="utility\PropertyCriteria.cs" />
+    <Compile Include="utility\FallsInRangeCriteria.cs" />
+    <Compile Include="utility\ranges\InclusiveRange.cs" />
+    <Compile Include="utility\ranges\Range.cs" />
     <Compile Include="utility\Where.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
