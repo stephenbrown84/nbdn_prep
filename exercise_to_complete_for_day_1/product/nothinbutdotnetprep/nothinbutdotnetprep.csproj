@@ -38,6 +38,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="collections\EnumerableExtensions.cs" />
     <Compile Include="collections\Genre.cs" />
     <Compile Include="collections\Movie.cs" />
     <Compile Include="collections\MovieLibrary.cs" />

@@ -1,32 +1,31 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.collections
 {
+
     public class MovieLibrary
     {
-        private List<Movie> movies;
+        List<Movie> movies;
 
         public MovieLibrary(IList<Movie> list_of_movies)
         {
-            movies = (List<Movie>)list_of_movies;
+            movies = (List<Movie>) list_of_movies;
         }
 
         public IEnumerable<Movie> all_movies()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) => true);
+            return movies.one_at_a_time();
         }
 
         public void add(Movie movie)
         {
             if (!movie_already_in_list(movie))
-            {
                 movies.Add(movie);
-            }
-
         }
 
-        private bool movie_already_in_list(Movie m)
+        bool movie_already_in_list(Movie m)
         {
             foreach (var movie in movies)
             {
@@ -38,11 +37,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_title_descending()
         {
-            movies.Sort((Movie a, Movie b) =>
-            {
-                return (String.Compare(b.title, a.title));
-
-            });
+            movies.Sort((Movie a, Movie b) => (String.Compare(b.title, a.title)));
 
             return all_movies();
         }
@@ -54,19 +49,17 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) => movie.production_studio == ProductionStudio.pixar || movie.production_studio == ProductionStudio.disney);
+            return
+                all_movies_that_are_satisfied_by(
+                                                    (Movie movie) =>
+                                                    movie.production_studio == ProductionStudio.pixar || movie.production_studio == ProductionStudio.disney);
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending()
         {
-            movies.Sort((Movie a, Movie b) =>
-            {
-                return (String.Compare(a.title, b.title));
-
-            });
+            movies.Sort((Movie a, Movie b) => (String.Compare(a.title, b.title)));
 
             return all_movies();
-
         }
 
         public IEnumerable<Movie> sort_all_movies_by_movie_studio_and_year_published()
@@ -83,15 +76,14 @@ namespace nothinbutdotnetprep.collections
                     if (get_studio_rating(a) == get_studio_rating(b)) return 0;
                     return get_studio_rating(a) > get_studio_rating(b) ? 1 : -1;
                 }
-
             });
 
             return all_movies();
         }
 
-        private int get_studio_rating(Movie movie)
+        int get_studio_rating(Movie movie)
         {
-            List<ProductionStudio> ratings = new List<ProductionStudio>();
+            var ratings = new List<ProductionStudio>();
 
             ratings.Add(ProductionStudio.mgm);
             ratings.Add(ProductionStudio.pixar);
@@ -100,7 +92,6 @@ namespace nothinbutdotnetprep.collections
             ratings.Add(ProductionStudio.disney);
 
             return ratings.IndexOf(movie.production_studio);
-
         }
 
 
@@ -142,7 +133,6 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_ascending()
         {
-
             movies.Sort((Movie a, Movie b) =>
             {
                 if (a.date_published == b.date_published) return 0;
@@ -153,12 +143,32 @@ namespace nothinbutdotnetprep.collections
         }
 
 
-        private IEnumerable<Movie> all_movies_that_are_satisfied_by(Predicate<Movie> criteria)
+        IEnumerable<Movie> all_movies_that_are_satisfied_by(Predicate<Movie> criteria)
         {
             foreach (var movie in movies)
             {
                 if (criteria(movie)) yield return movie;
             }
+        }
+    }
+
+    public class ReadOnlySetOf<T> : IEnumerable<T>
+    {
+        IList<T> movies;
+
+        public ReadOnlySetOf(IList<T> movies)
+        {
+            this.movies = movies;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            return movies.GetEnumerator();
         }
     }
 }

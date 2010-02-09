@@ -19,7 +19,7 @@ class LocalSettings
   	:log_level => "DEBUG",
   	:xunit_report_file_dir => "artifacts" ,
   	:xunit_report_file_name => "test_report",
-  	:xunit_report_type => "text",
+  	:xunit_report_type => "xml",
   	:xunit_show_test_report => true,
   	:debug => "TRUE"
 
