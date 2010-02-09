@@ -32,6 +32,9 @@ using nothinbutdotnetprep.tests.utility;
  *      Open Closed Principle
  *      Coding to Specs (Tests)
  *      
+ *      No use of linq
+ *      ProductionStudio adheres to Open/Closed principle
+ *      
  *
  * As I said earlier, the tests are complete. You will just need to get the implementation working. As you progress through the exercise you will undoubtebly see areas
  * where refactoring can take place (particularly around the area of methods that don't need to be there on MovieLibrary. This is as much a design exercise as it is
