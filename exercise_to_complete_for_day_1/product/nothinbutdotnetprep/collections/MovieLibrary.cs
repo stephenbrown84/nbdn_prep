@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.collections
@@ -44,7 +43,12 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_published_by_pixar()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) => movie.production_studio == ProductionStudio.pixar);
+            return all_movies_that_are_satisfied_by(is_published_by(ProductionStudio.pixar));
+        }
+
+        private Predicate<Movie> is_published_by(ProductionStudio production_studio)
+        {
+            return  movie=> movie.production_studio == production_studio;          
         }
 
         public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
@@ -149,26 +153,6 @@ namespace nothinbutdotnetprep.collections
             {
                 if (criteria(movie)) yield return movie;
             }
-        }
-    }
-
-    public class ReadOnlySetOf<T> : IEnumerable<T>
-    {
-        IList<T> movies;
-
-        public ReadOnlySetOf(IList<T> movies)
-        {
-            this.movies = movies;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
-        }
-
-        public IEnumerator<T> GetEnumerator()
-        {
-            return movies.GetEnumerator();
         }
     }
 }
