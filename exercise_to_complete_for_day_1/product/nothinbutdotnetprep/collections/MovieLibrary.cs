@@ -14,10 +14,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) =>
-            {
-                return true;
-            });
+            return all_movies_that_are_satisfied_by((Movie movie) => true);
         }
 
         public void add(Movie movie)
@@ -52,18 +49,12 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_published_by_pixar()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) =>
-            {
-                return movie.production_studio == ProductionStudio.pixar;
-            });
+            return all_movies_that_are_satisfied_by((Movie movie) => movie.production_studio == ProductionStudio.pixar);
         }
 
         public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) =>
-            {
-                return movie.production_studio == ProductionStudio.pixar || movie.production_studio == ProductionStudio.disney;
-            });
+            return all_movies_that_are_satisfied_by((Movie movie) => movie.production_studio == ProductionStudio.pixar || movie.production_studio == ProductionStudio.disney);
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending()
@@ -125,26 +116,17 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_published_between_years(int startingYear, int endingYear)
         {
-            return all_movies_that_are_satisfied_by((Movie movie) =>
-            {
-                return movie.date_published.Year <= endingYear && movie.date_published.Year >= startingYear;
-            });
+            return all_movies_that_are_satisfied_by((Movie movie) => movie.date_published.Year <= endingYear && movie.date_published.Year >= startingYear);
         }
 
         public IEnumerable<Movie> all_kid_movies()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) =>
-            {
-                return movie.genre == Genre.kids;
-            });
+            return all_movies_that_are_satisfied_by((Movie movie) => movie.genre == Genre.kids);
         }
 
         public IEnumerable<Movie> all_action_movies()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) =>
-            {
-                return movie.genre == Genre.action;
-            });
+            return all_movies_that_are_satisfied_by((Movie movie) => movie.genre == Genre.action);
         }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
