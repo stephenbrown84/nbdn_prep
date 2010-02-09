@@ -3,9 +3,10 @@ bin
 *.chm
 _ReSharper.*
 *.csproj.user
-*.Resharper.user
+*.ReSharper.user
 *.resharper.user
 *.resharper
+*.ReSharper
 *.suo
 *.cache
 *~
