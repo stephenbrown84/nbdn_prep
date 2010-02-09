@@ -3,29 +3,33 @@ using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.collections
 {
-
     public class MovieLibrary
     {
-        List<Movie> movies;
+        private List<Movie> movies;
 
         public MovieLibrary(IList<Movie> list_of_movies)
         {
-            movies = (List<Movie>) list_of_movies;
+            movies = (List<Movie>)list_of_movies;
         }
-
 
         public IEnumerable<Movie> all_movies()
         {
-            return all_movies_that_are_satisfied_by(movie => true);
+            return all_movies_that_are_satisfied_by((Movie movie) =>
+            {
+                return true;
+            });
         }
 
         public void add(Movie movie)
         {
             if (!movie_already_in_list(movie))
+            {
                 movies.Add(movie);
+            }
+
         }
 
-        bool movie_already_in_list(Movie m)
+        private bool movie_already_in_list(Movie m)
         {
             foreach (var movie in movies)
             {
@@ -37,39 +41,52 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_title_descending()
         {
-            movies.Sort((Movie a, Movie b) => (String.Compare(b.title, a.title)));
+            movies.Sort((Movie a, Movie b) =>
+            {
+                return (String.Compare(b.title, a.title));
+
+            });
 
             return all_movies();
         }
 
-        public static Predicate<Movie> all_movies_published_by_pixar()
+        public IEnumerable<Movie> all_movies_published_by_pixar()
         {
-            return is_published_by(ProductionStudio.pixar);
+            return all_movies_that_are_satisfied_by((Movie movie) =>
+            {
+                return movie.production_studio == ProductionStudio.pixar;
+            });
         }
 
-        private static Predicate<Movie> is_published_by(ProductionStudio production_studio)
+        public IEnumerable<Movie> all_movies_published_by_pixar_or_disney()
         {
-            return  movie=> movie.production_studio == production_studio;          
-        }
-
-        public static Predicate<Movie> all_movies_published_by_pixar_or_disney()
-        {
-            return
-                movie =>
-                movie.production_studio == ProductionStudio.pixar || movie.production_studio == ProductionStudio.disney;
+            return all_movies_that_are_satisfied_by((Movie movie) =>
+            {
+                return movie.production_studio == ProductionStudio.pixar || movie.production_studio == ProductionStudio.disney;
+            });
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending()
         {
-            movies.Sort((Movie a, Movie b) => (String.Compare(a.title, b.title)));
+            movies.Sort((Movie a, Movie b) =>
+            {
+                return (String.Compare(a.title, b.title));
+
+            });
 
             return all_movies();
+
         }
 
         public IEnumerable<Movie> sort_all_movies_by_movie_studio_and_year_published()
         {
             movies.Sort((Movie a, Movie b) =>
             {
+<<<<<<< HEAD
+                if (a.production_studio.Rating.Equals(b.production_studio.Rating))
+                    return a.date_published.Year.CompareTo(b.date_published.Year);
+                return a.production_studio.Rating.CompareTo(b.production_studio.Rating);
+=======
                 if (get_studio_rating(a) == get_studio_rating(b))
                 {
                     if (a.date_published == b.date_published) return 0;
@@ -80,14 +97,16 @@ namespace nothinbutdotnetprep.collections
                     if (get_studio_rating(a) == get_studio_rating(b)) return 0;
                     return get_studio_rating(a) > get_studio_rating(b) ? 1 : -1;
                 }
+
+>>>>>>> 1d22c160850e0c034313fc56599c90fe08372628
             });
 
             return all_movies();
         }
 
-        int get_studio_rating(Movie movie)
+        private int get_studio_rating(Movie movie)
         {
-            var ratings = new List<ProductionStudio>();
+            List<ProductionStudio> ratings = new List<ProductionStudio>();
 
             ratings.Add(ProductionStudio.mgm);
             ratings.Add(ProductionStudio.pixar);
@@ -96,32 +115,42 @@ namespace nothinbutdotnetprep.collections
             ratings.Add(ProductionStudio.disney);
 
             return ratings.IndexOf(movie.production_studio);
+
         }
 
 
-        public static Predicate<Movie> all_movies_not_published_by_pixar()
+        public IEnumerable<Movie> all_movies_not_published_by_pixar()
         {
-            return movie => movie.production_studio != ProductionStudio.pixar;
+            return all_movies_that_are_satisfied_by(x => x.production_studio != ProductionStudio.pixar);
         }
 
-        public static Predicate<Movie> all_movies_published_after(int year)
+        public IEnumerable<Movie> all_movies_published_after(int year)
         {
-            return movie => movie.date_published.Year > year;
+            return all_movies_that_are_satisfied_by(movie1 => movie1.date_published.Year > year);
         }
 
-        public static Predicate<Movie> all_movies_published_between_years(int startingYear, int endingYear)
+        public IEnumerable<Movie> all_movies_published_between_years(int startingYear, int endingYear)
         {
-            return movie => movie.date_published.Year >= startingYear && movie.date_published.Year <= endingYear;
+            return all_movies_that_are_satisfied_by((Movie movie) =>
+            {
+                return movie.date_published.Year <= endingYear && movie.date_published.Year >= startingYear;
+            });
         }
 
-        public static Predicate<Movie> all_kid_movies()
+        public IEnumerable<Movie> all_kid_movies()
         {
-            return movie => movie.genre == Genre.kids;
+            return all_movies_that_are_satisfied_by((Movie movie) =>
+            {
+                return movie.genre == Genre.kids;
+            });
         }
 
-        public static Predicate<Movie> all_action_movies()
+        public IEnumerable<Movie> all_action_movies()
         {
-            return movie => movie.genre == Genre.action;
+            return all_movies_that_are_satisfied_by((Movie movie) =>
+            {
+                return movie.genre == Genre.action;
+            });
         }
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
@@ -137,6 +166,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_ascending()
         {
+
             movies.Sort((Movie a, Movie b) =>
             {
                 if (a.date_published == b.date_published) return 0;
@@ -147,7 +177,7 @@ namespace nothinbutdotnetprep.collections
         }
 
 
-        public IEnumerable<Movie> all_movies_that_are_satisfied_by(Predicate<Movie> criteria)
+        private IEnumerable<Movie> all_movies_that_are_satisfied_by(Predicate<Movie> criteria)
         {
             foreach (var movie in movies)
             {
