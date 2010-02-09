@@ -82,6 +82,11 @@ namespace nothinbutdotnetprep.collections
         {
             movies.Sort((Movie a, Movie b) =>
             {
+<<<<<<< HEAD
+                if (a.production_studio.Rating.Equals(b.production_studio.Rating))
+                    return a.date_published.Year.CompareTo(b.date_published.Year);
+                return a.production_studio.Rating.CompareTo(b.production_studio.Rating);
+=======
                 if (get_studio_rating(a) == get_studio_rating(b))
                 {
                     if (a.date_published == b.date_published) return 0;
@@ -92,6 +97,8 @@ namespace nothinbutdotnetprep.collections
                     if (get_studio_rating(a) == get_studio_rating(b)) return 0;
                     return get_studio_rating(a) > get_studio_rating(b) ? 1 : -1;
                 }
+
+>>>>>>> 1d22c160850e0c034313fc56599c90fe08372628
             });
 
             return all_movies();
