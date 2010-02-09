@@ -3,7 +3,6 @@ using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.collections
 {
-
     public class MovieLibrary
     {
         List<Movie> movies;
@@ -16,20 +15,21 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies()
         {
-            return all_movies_that_are_satisfied_by(movie => true);
+            return movies.one_at_a_time();
         }
 
         public void add(Movie movie)
         {
-            if (!movie_already_in_list(movie))
-                movies.Add(movie);
+            if (already_contains(movie)) return;
+
+            movies.Add(movie);
         }
 
-        bool movie_already_in_list(Movie m)
+        bool already_contains(Movie other_movie)
         {
             foreach (var movie in movies)
             {
-                if (movie.title == m.title) return true;
+                if (movie.Equals(other_movie)) return true;
             }
 
             return false;
@@ -40,23 +40,6 @@ namespace nothinbutdotnetprep.collections
             movies.Sort((Movie a, Movie b) => (String.Compare(b.title, a.title)));
 
             return all_movies();
-        }
-
-        public static Predicate<Movie> all_movies_published_by_pixar()
-        {
-            return is_published_by(ProductionStudio.pixar);
-        }
-
-        private static Predicate<Movie> is_published_by(ProductionStudio production_studio)
-        {
-            return  movie=> movie.production_studio == production_studio;          
-        }
-
-        public static Predicate<Movie> all_movies_published_by_pixar_or_disney()
-        {
-            return
-                movie =>
-                movie.production_studio == ProductionStudio.pixar || movie.production_studio == ProductionStudio.disney;
         }
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending()
@@ -99,31 +82,6 @@ namespace nothinbutdotnetprep.collections
         }
 
 
-        public static Predicate<Movie> all_movies_not_published_by_pixar()
-        {
-            return movie => movie.production_studio != ProductionStudio.pixar;
-        }
-
-        public static Predicate<Movie> all_movies_published_after(int year)
-        {
-            return movie => movie.date_published.Year > year;
-        }
-
-        public static Predicate<Movie> all_movies_published_between_years(int startingYear, int endingYear)
-        {
-            return movie => movie.date_published.Year >= startingYear && movie.date_published.Year <= endingYear;
-        }
-
-        public static Predicate<Movie> all_kid_movies()
-        {
-            return movie => movie.genre == Genre.kids;
-        }
-
-        public static Predicate<Movie> all_action_movies()
-        {
-            return movie => movie.genre == Genre.action;
-        }
-
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
         {
             movies.Sort((Movie a, Movie b) =>
@@ -144,15 +102,6 @@ namespace nothinbutdotnetprep.collections
             });
 
             return all_movies();
-        }
-
-
-        public IEnumerable<Movie> all_movies_that_are_satisfied_by(Predicate<Movie> criteria)
-        {
-            foreach (var movie in movies)
-            {
-                if (criteria(movie)) yield return movie;
-            }
         }
     }
 }

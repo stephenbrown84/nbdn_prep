@@ -215,7 +215,7 @@ namespace nothinbutdotnetprep.tests
 
             it should_be_able_to_find_all_movies_published_by_pixar = () =>
             {
-                var results = sut.all_movies_that_are_satisfied_by(MovieLibrary.all_movies_published_by_pixar());
+                var results = sut.all_movies().all_that_satisfy(Where<Movie>.has_a(x => x.production_studio).equal_to(ProductionStudio.pixar));
 
                 results.should_only_contain(cars, a_bugs_life);
             };
@@ -223,21 +223,21 @@ namespace nothinbutdotnetprep.tests
             it should_be_able_to_find_all_movies_published_by_pixar_or_disney = () =>
             {
                 var results =
-                    sut.all_movies_that_are_satisfied_by(MovieLibrary.all_movies_published_by_pixar_or_disney());
+                    sut.all_movies().all_that_satisfy(Movie.is_published_by_pixar_or_disney);
 
                 results.should_only_contain(a_bugs_life, pirates_of_the_carribean, cars);
             };
 
             it should_be_able_to_find_all_movies_not_published_by_pixar = () =>
             {
-                var results = sut.all_movies_that_are_satisfied_by(MovieLibrary.all_movies_not_published_by_pixar());
+                var results = sut.all_movies().all_that_satisfy(Movie.is_not_published_by_pixar);
 
                 results.should_not_contain(cars, a_bugs_life);
             };
 
             it should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
             {
-                var results = sut.all_movies_that_are_satisfied_by(MovieLibrary.all_movies_published_after(2004));
+                var results = sut.all_movies().all_that_satisfy(Movie.is_published_after(2004));
 
                 results.should_only_contain(the_ring, shrek, theres_something_about_mary);
             };
@@ -245,21 +245,21 @@ namespace nothinbutdotnetprep.tests
             it should_be_able_to_find_all_movies_published_between_a_certain_range_of_years = () =>
             {
                 var results =
-                    sut.all_movies_that_are_satisfied_by(MovieLibrary.all_movies_published_between_years(1982, 2003));
+                    sut.all_movies().all_that_satisfy(Movie.is_published_between_years(1982, 2003));
 
                 results.should_only_contain(indiana_jones_and_the_temple_of_doom, a_bugs_life, pirates_of_the_carribean);
             };
 
             it should_be_able_to_find_all_kid_movies = () =>
             {
-                var results = sut.all_movies_that_are_satisfied_by(MovieLibrary.all_kid_movies());
+                var results = sut.all_movies().all_that_satisfy(Movie.is_a_kid_movie());
 
                 results.should_only_contain(a_bugs_life, shrek, cars);
             };
 
             it should_be_able_to_find_all_action_movies = () =>
             {
-                var results = sut.all_movies_that_are_satisfied_by(MovieLibrary.all_action_movies());
+                var results = sut.all_movies().all_that_satisfy(Movie.is_an_action_movie());
 
                 results.should_only_contain(indiana_jones_and_the_temple_of_doom, pirates_of_the_carribean);
             };
