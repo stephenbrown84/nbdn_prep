@@ -88,16 +88,9 @@ namespace nothinbutdotnetprep.collections
         {
             _allMovies.Sort(delegate(Movie a, Movie b)
             {
-                if(get_studio_rating(a) == get_studio_rating(b))
-                {
-                    if (a.date_published ==  b.date_published) return 0;
-                    return a.date_published > b.date_published ? 1 : -1;
-                }else
-                {
-                    if (get_studio_rating(a) == get_studio_rating(b)) return 0;
-                    return get_studio_rating(a) > get_studio_rating(b) ? 1 : -1;
-                }
-
+                if (a.production_studio.Rating.Equals(b.production_studio.Rating))
+                    return a.date_published.Year.CompareTo(b.date_published.Year);
+                return a.production_studio.Rating.CompareTo(b.production_studio.Rating);
             });
 
             return all_movies();
