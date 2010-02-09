@@ -5,11 +5,11 @@ namespace nothinbutdotnetprep.collections
 {
     public class MovieLibrary
     {
-        private List<Movie> _allMovies;
+        private List<Movie> movies;
 
         public MovieLibrary(IList<Movie> list_of_movies)
         {
-            _allMovies = (List<Movie>)list_of_movies;
+            movies = (List<Movie>)list_of_movies;
         }
 
         public IEnumerable<Movie> all_movies()
@@ -24,14 +24,14 @@ namespace nothinbutdotnetprep.collections
         {
             if (!movie_already_in_list(movie))
             {
-                _allMovies.Add(movie);
+                movies.Add(movie);
             }
 
         }
 
         private bool movie_already_in_list(Movie m)
         {
-            foreach (var movie in _allMovies)
+            foreach (var movie in movies)
             {
                 if (movie.title == m.title) return true;
             }
@@ -41,7 +41,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_title_descending()
         {
-            _allMovies.Sort((Movie a, Movie b) =>
+            movies.Sort((Movie a, Movie b) =>
             {
                 return (String.Compare(b.title, a.title));
 
@@ -68,7 +68,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_title_ascending()
         {
-            _allMovies.Sort((Movie a, Movie b) =>
+            movies.Sort((Movie a, Movie b) =>
             {
                 return (String.Compare(a.title, b.title));
 
@@ -80,7 +80,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_movie_studio_and_year_published()
         {
-            _allMovies.Sort((Movie a, Movie b) =>
+            movies.Sort((Movie a, Movie b) =>
             {
                 if (get_studio_rating(a) == get_studio_rating(b))
                 {
@@ -115,18 +115,12 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies_not_published_by_pixar()
         {
-            return all_movies_that_are_satisfied_by((Movie movie) =>
-            {
-                return movie.production_studio != ProductionStudio.pixar;
-            });
+            return all_movies_that_are_satisfied_by(x => x.production_studio != ProductionStudio.pixar);
         }
 
         public IEnumerable<Movie> all_movies_published_after(int year)
         {
-            return all_movies_that_are_satisfied_by((Movie movie) =>
-            {
-                return movie.date_published.Year > year;
-            });
+            return all_movies_that_are_satisfied_by(movie1 => movie1.date_published.Year > year);
         }
 
         public IEnumerable<Movie> all_movies_published_between_years(int startingYear, int endingYear)
@@ -155,7 +149,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> sort_all_movies_by_date_published_descending()
         {
-            _allMovies.Sort((Movie a, Movie b) =>
+            movies.Sort((Movie a, Movie b) =>
             {
                 if (a.date_published == b.date_published) return 0;
                 return a.date_published < b.date_published ? 1 : -1;
@@ -167,7 +161,7 @@ namespace nothinbutdotnetprep.collections
         public IEnumerable<Movie> sort_all_movies_by_date_published_ascending()
         {
 
-            _allMovies.Sort((Movie a, Movie b) =>
+            movies.Sort((Movie a, Movie b) =>
             {
                 if (a.date_published == b.date_published) return 0;
                 return a.date_published > b.date_published ? 1 : -1;
@@ -177,14 +171,11 @@ namespace nothinbutdotnetprep.collections
         }
 
 
-        private IEnumerable<Movie> all_movies_that_are_satisfied_by(Predicate<Movie> pred)
+        private IEnumerable<Movie> all_movies_that_are_satisfied_by(Predicate<Movie> criteria)
         {
-            foreach (var movie in _allMovies)
+            foreach (var movie in movies)
             {
-                if (pred(movie))
-                {
-                    yield return movie;
-                }
+                if (criteria(movie)) yield return movie;
             }
         }
     }
