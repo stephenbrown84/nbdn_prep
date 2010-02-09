@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 
 namespace nothinbutdotnetprep.utility
 {
@@ -14,7 +14,6 @@ namespace nothinbutdotnetprep.utility
     {
         Func<ItemToFilter, PropertyType> accessor;
 
-        
         public CriteriaFactory(Func<ItemToFilter, PropertyType> accessor)
         {
             this.accessor = accessor;
@@ -23,6 +22,11 @@ namespace nothinbutdotnetprep.utility
         public Criteria<ItemToFilter> equal_to(PropertyType value)
         {
             return new AnonymousCriteria<ItemToFilter>(x => accessor(x).Equals(value));
+        }
+
+        public Criteria<ItemToFilter> not_equal_to(PropertyType value)
+        {
+            return new AnonymousCriteria<ItemToFilter>(x => !accessor(x).Equals(value));
         }
     }
 }
