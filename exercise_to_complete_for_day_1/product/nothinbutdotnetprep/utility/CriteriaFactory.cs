@@ -18,9 +18,11 @@ namespace nothinbutdotnetprep.utility
                                                                     new EqualToCriteria<PropertyType>(value));
         }
 
-        public Criteria<Movie> equal_to_any(params PropertyType[] values)
+        public Criteria<ItemToFilter> equal_to_any(params PropertyType[] values)
         {
-            throw new NotImplementedException();
+            return new PropertyCriteria<ItemToFilter, PropertyType>(accessor,
+                                                                    new EqualToAnyCriteria<PropertyType>(values));
+            //throw new NotImplementedException();
         }
     }
 }
