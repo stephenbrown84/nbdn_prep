@@ -22,14 +22,14 @@ namespace nothinbutdotnetprep.collections
 
         public void add(Movie movie)
         {
-            if (!MovieAlreadyInList(movie))
+            if (!movie_already_in_list(movie))
             {
                 _allMovies.Add(movie);    
             }
             
         }
 
-        private bool MovieAlreadyInList(Movie m)
+        private bool movie_already_in_list(Movie m)
         {
             foreach (var movie in _allMovies)
             {
@@ -88,14 +88,14 @@ namespace nothinbutdotnetprep.collections
         {
             _allMovies.Sort(delegate(Movie a, Movie b)
             {
-                if(GetStudioRating(a) == GetStudioRating(b))
+                if(get_studio_rating(a) == get_studio_rating(b))
                 {
                     if (a.date_published ==  b.date_published) return 0;
                     return a.date_published > b.date_published ? 1 : -1;
                 }else
                 {
-                    if (GetStudioRating(a) == GetStudioRating(b)) return 0;
-                    return GetStudioRating(a) > GetStudioRating(b) ? 1 : -1;
+                    if (get_studio_rating(a) == get_studio_rating(b)) return 0;
+                    return get_studio_rating(a) > get_studio_rating(b) ? 1 : -1;
                 }
 
             });
@@ -103,7 +103,7 @@ namespace nothinbutdotnetprep.collections
             return all_movies();
         }
 
-        private int GetStudioRating(Movie movie)
+        private int get_studio_rating(Movie movie)
         {
             List<ProductionStudio> ratings = new List<ProductionStudio>();
 
