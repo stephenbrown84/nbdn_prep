@@ -241,16 +241,16 @@ namespace nothinbutdotnetprep.tests
 
             it should_be_able_to_find_all_movies_published_after_a_certain_year = () =>
             {
-                //var results = sut.all_movies().all_that_satisfy(Movie.is_published_after(2004));
-
-                var results = sut.all_movies().all_that_satisfy
-                    (Where<Movie>.has_a<int>(x => x.date_published.Year).greater_than(2004));
-
+                var results =
+                    sut.all_movies().all_that_satisfy(Where<Movie>.has_an(x => x.date_published.Year).greater_than(2004));
+                
                 results.should_only_contain(the_ring, shrek, theres_something_about_mary);
             };
 
             it should_be_able_to_find_all_movies_published_between_a_certain_range_of_years = () =>
             {
+                var results =
+                    sut.all_movies().all_that_satisfy(Where<Movie>.has_an(x => x.date_published).is_between(1982, 2003));
                 var results =
                     sut.all_movies().all_that_satisfy(Movie.is_published_between_years(1982, 2003));
 
