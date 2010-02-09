@@ -4,6 +4,7 @@ bin
 _ReSharper.*
 *.csproj.user
 *.resharper.user
+*.ReSharper.user
 *.resharper
 *.suo
 *.cache
@@ -17,3 +18,5 @@ product/config/app.config.vista
 product/config/app.config.xp
 product/config/log4net.config.xml
 
+
+/exercise_to_complete_for_day_1/solution.5.0.ReSharper.user
