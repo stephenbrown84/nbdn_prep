@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using nothinbutdotnetprep.utility;
+using nothinbutdotnetprep.utility.collections;
 using nothinbutdotnetprep.utility.filtering;
+using nothinbutdotnetprep.utility.sorting;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -27,6 +29,23 @@ namespace nothinbutdotnetprep.collections
             {
                 yield return item;
             }
+        }
+
+        public static PrimarySort<T> sorted_by<T, C>(this IEnumerable<T> items, Func<T, C> accessor) 
+            where C : IComparable<C>
+        {
+            return new PrimarySort<T>(items, new PropertyComparer<T, C>(accessor, false));
+        }
+
+        public static PrimarySort<T> sorted_by<T, C>(this IEnumerable<T> items, Func<T, C> accessor, params C[] values)
+        {
+            return new PrimarySort<T>(items, new ProvidedPropertyComparer<T, C>(accessor, false, values));
+        }
+
+        public static PrimarySort<T> sorted_by_descending<T, C>(this IEnumerable<T> items, Func<T, C> accessor)
+            where C : IComparable<C>
+        {
+            return new PrimarySort<T>(items, new PropertyComparer<T, C>(accessor, true));
         }
     }
 }
