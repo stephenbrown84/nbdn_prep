@@ -7,6 +7,7 @@ using developwithpassion.bdddoc.core;
 using nothinbutdotnetprep.collections;
 using nothinbutdotnetprep.tests.utility;
 using nothinbutdotnetprep.utility;
+using nothinbutdotnetprep.utility.filtering;
 
 /* The following set of Contexts (TestFixture) are in place to specify the functionality that you need to complete for the MovieLibrary class.
  * MovieLibrary is an aggregate root for the Movie class. It exposes the ability to search,sort, and iterate over all of the movies that it aggregates.
@@ -206,6 +207,14 @@ namespace nothinbutdotnetprep.tests
             };
         }
 
+        public class IsEven : Criteria<int>
+        {
+            public bool is_satisfied_by(int item)
+            {
+                return item%2 == 0;
+            }
+        }
+
         [Concern(typeof (MovieLibrary))]
         public class when_searching_for_movies : searching_and_sorting_concerns_for_movie_library
         {
@@ -278,6 +287,17 @@ namespace nothinbutdotnetprep.tests
              * movies using different criteria. Feel free to change/remove explicit methods if you find a way to encompass sorting
              * without the need for using explicit methods. For this exercise, no linq queries are allowed!!. */
 
+            //You will need to use the IComparer<T> interface
+            //You will need to use delegates
+            //You will need to use composition
+            //I want you to be able to support the following:
+
+            /* var results = sut.all_movies().sorted_by(x => x.rating)
+             *                               .then_by_descending(x => x.date_published)
+             *                               .then_by(x => x.title);
+             *                               .then_by(x => x.production_studio,ProductionStudio.Pixar,Disney,MGM,Universal)
+             *                               .then_using(some_comparer)
+             */                       
             it should_be_able_to_sort_all_movies_by_title_descending = () =>
             {
                 var results = sut.sort_all_movies_by_title_descending();

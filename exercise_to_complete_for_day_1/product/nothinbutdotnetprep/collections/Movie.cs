@@ -1,5 +1,5 @@
 using System;
-using nothinbutdotnetprep.utility;
+using nothinbutdotnetprep.utility.filtering;
 
 namespace nothinbutdotnetprep.collections
 {
@@ -38,7 +38,7 @@ namespace nothinbutdotnetprep.collections
 
         public static Predicate<Movie> is_published_by_pixar_or_disney
         {
-            get { return new IsPublishedBy(ProductionStudio.pixar).or(new IsPublishedBy(ProductionStudio.disney)).is_satisfied_by;}
+            get { return new IsPublishedBy(ProductionStudio.pixar).or(new IsPublishedBy(ProductionStudio.disney)).is_satisfied_by; }
         }
 
         public static Predicate<Movie> is_not_published_by_pixar
