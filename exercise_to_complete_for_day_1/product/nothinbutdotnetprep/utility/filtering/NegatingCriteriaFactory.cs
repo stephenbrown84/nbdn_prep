@@ -1,4 +1,4 @@
-namespace nothinbutdotnetprep.utility
+namespace nothinbutdotnetprep.utility.filtering
 {
     public class NegatingCriteriaFactory<ItemToFilter, PropertyType> : CriteriaFactory<ItemToFilter, PropertyType>
     {

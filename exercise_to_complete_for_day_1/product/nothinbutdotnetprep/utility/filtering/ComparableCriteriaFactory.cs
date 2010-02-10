@@ -1,7 +1,7 @@
 ﻿using System;
 using nothinbutdotnetprep.utility.ranges;
 
-namespace nothinbutdotnetprep.utility
+namespace nothinbutdotnetprep.utility.filtering
 {
     public class ComparableCriteriaFactory<ItemToFilter, PropertyType> : CriteriaFactory<ItemToFilter, PropertyType>
         where PropertyType : IComparable<PropertyType>

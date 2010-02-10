@@ -15,7 +15,7 @@ namespace nothinbutdotnetprep.collections
 
         public IEnumerable<Movie> all_movies()
         {
-            return movies.one_at_a_time();
+            return movies;
         }
 
         public void add(Movie movie)
@@ -38,7 +38,6 @@ namespace nothinbutdotnetprep.collections
         public IEnumerable<Movie> sort_all_movies_by_title_descending()
         {
             movies.Sort((Movie a, Movie b) => (String.Compare(b.title, a.title)));
-
             return all_movies();
         }
 

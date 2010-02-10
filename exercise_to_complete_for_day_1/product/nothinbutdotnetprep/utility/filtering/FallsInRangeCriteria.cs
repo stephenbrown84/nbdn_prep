@@ -1,7 +1,7 @@
 using System;
 using nothinbutdotnetprep.utility.ranges;
 
-namespace nothinbutdotnetprep.utility
+namespace nothinbutdotnetprep.utility.filtering
 {
     public class FallsInRangeCriteria<T> : Criteria<T> where T: IComparable<T>
     {

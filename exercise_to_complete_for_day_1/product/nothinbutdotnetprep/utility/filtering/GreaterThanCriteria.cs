@@ -1,6 +1,6 @@
 using System;
 
-namespace nothinbutdotnetprep.utility
+namespace nothinbutdotnetprep.utility.filtering
 {
     public class GreaterThanCriteria<T> : Criteria<T> where T : IComparable<T>
     {

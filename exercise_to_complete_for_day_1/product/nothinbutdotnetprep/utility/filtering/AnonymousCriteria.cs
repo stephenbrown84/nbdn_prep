@@ -1,6 +1,6 @@
 using System;
 
-namespace nothinbutdotnetprep.utility
+namespace nothinbutdotnetprep.utility.filtering
 {
     public class AnonymousCriteria<T> : Criteria<T>
     {
@@ -16,4 +16,5 @@ namespace nothinbutdotnetprep.utility
             return criteria(item);
         }
     }
+
 }
