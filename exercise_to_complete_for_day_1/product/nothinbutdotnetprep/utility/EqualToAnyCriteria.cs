@@ -1,26 +1,19 @@
-using System;
+using System.Collections.Generic;
 
 namespace nothinbutdotnetprep.utility
 {
     public class EqualToAnyCriteria<T> : Criteria<T>
     {
-        private T[] _values;
+        IEnumerable<T> values;
 
-        public EqualToAnyCriteria(T[] values)
+        public EqualToAnyCriteria(params T[] values)
         {
-            this._values = values;
+            this.values = values;
         }
+
         public bool is_satisfied_by(T item)
         {
-            foreach (var value in _values)
-            {
-                if (item.Equals(value))
-                {
-                    return true;
-                } 
-            }
-
-            return false;
+            return new List<T>(values).Contains(item);
         }
     }
 }

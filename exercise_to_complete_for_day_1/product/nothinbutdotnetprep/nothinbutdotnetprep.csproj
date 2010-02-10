@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProductVersion>9.0.21022</ProductVersion>
+    <ProductVersion>9.0.30729</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{286C7067-D921-4B26-8CFA-9F9B795FD4E1}</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -52,8 +52,8 @@
     <Compile Include="utility\Criteria.cs" />
     <Compile Include="utility\CriteriaExtensions.cs" />
     <Compile Include="utility\CriteriaFactory.cs" />
+    <Compile Include="utility\DefaultCriteriaFactory.cs" />
     <Compile Include="utility\EqualToAnyCriteria.cs" />
-    <Compile Include="utility\EqualToCriteria.cs" />
     <Compile Include="utility\GreaterThanCriteria.cs" />
     <Compile Include="utility\NegatingCriteria.cs" />
     <Compile Include="utility\OrCriteria.cs" />

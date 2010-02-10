@@ -4,9 +4,9 @@ namespace nothinbutdotnetprep.utility
 {
     public class Where<ItemToFilter>
     {
-        public static CriteriaFactory<ItemToFilter, PropertyType> has_a<PropertyType>(Func<ItemToFilter, PropertyType> accessor)
+        public static DefaultCriteriaFactory<ItemToFilter, PropertyType> has_a<PropertyType>(Func<ItemToFilter, PropertyType> accessor)
         {
-            return new CriteriaFactory<ItemToFilter, PropertyType>(accessor);
+            return new DefaultCriteriaFactory<ItemToFilter, PropertyType>(accessor);
         }
 
         public static ComparableCriteriaFactory<ItemToFilter, PropertyType> has_an<PropertyType>(Func<ItemToFilter, PropertyType> accessor)
