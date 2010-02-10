@@ -232,10 +232,10 @@ namespace nothinbutdotnetprep.tests
 
             it should_be_able_to_find_all_movies_not_published_by_pixar = () =>
             {
-//                var results = sut.all_movies().all_that_satisfy
-//                    (Where<Movie>.has_a(x => x.production_studio).not.equal_to(ProductionStudio.pixar));
-//
-//                results.should_not_contain(cars, a_bugs_life);
+                var results = sut.all_movies().all_that_satisfy
+                    (Where<Movie>.has_a(x => x.production_studio).not.equal_to(ProductionStudio.pixar));
+
+                results.should_not_contain(cars, a_bugs_life);
             };
 
             it should_be_able_to_find_all_movies_published_after_a_certain_year = () =>

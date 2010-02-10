@@ -21,5 +21,10 @@ namespace nothinbutdotnetprep.utility
             return new PropertyCriteria<ItemToFilter, PropertyType>(accessor,
                                                                     new EqualToAnyCriteria<PropertyType>(values));
         }
+
+        public NegatingCriteriaFactory<ItemToFilter, PropertyType> not
+        {
+            get { return new NegatingCriteriaFactory<ItemToFilter, PropertyType>(this); }
+        }
     }
 }
